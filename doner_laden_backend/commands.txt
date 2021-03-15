@@ -1,0 +1,4 @@
+to execute a running docker for example mysql
+find out the name of running docker: #docker ps
+then execute: docker exec -it "docker name without cotation" bash
+now mysql commond: # mysql -u "username without cotation" -p
