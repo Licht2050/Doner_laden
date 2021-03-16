@@ -2,5 +2,5 @@ Django
 djangorestframework
 mysqlclient
 django-mysql
-django-cors-header
+django-cors-headers
 mysql-connector
