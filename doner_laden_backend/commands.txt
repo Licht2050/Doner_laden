@@ -5,7 +5,18 @@ now mysql commond: # mysql -u "username without cotation" -p
 
 
 
+docker-compose run web python3 manage.py showmigrations
+
 Update an existing Image
 
 sudo docker-compose up --force-recreate --build -d
 sudo docker image prune -f
+
+
+create user by django admin
+docker-compose run web python3 manage.py createsuperuser
+
+to go mysql
+docker-compose exec web sh
+
+docker exec -it doner_laden_backend_db_1 bash
