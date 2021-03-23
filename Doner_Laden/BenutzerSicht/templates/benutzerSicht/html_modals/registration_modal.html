@@ -1,0 +1,81 @@
+<!-- REGISTRATION MODAL -->
+<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h3 class="modal-title text-light halder-title" id="registrationModalLabel">Registrieren</h3>
+            </div>
+            <div class="modal-body">
+                <!-- REGISTRATION FORM -->
+                <form method="post" >
+                    <!-- NAME -->
+
+                    {% for field in kundenForm %}
+                        <div class="text-light mt-1">
+                            {{ field.label_tag }} 
+                        </div>
+                        {{ field }}
+                        {{ field.error}}
+                    {% endfor %}
+                    
+                    {% comment %} <div class="form-group mt-2">
+                        {% csrf_token %}
+                        {{ kundenForm.vorname.label_tag }}
+                       
+                        {{ kundenForm.vorname }}
+                        
+                        <!--
+                             <label for="nameInput" class="text-light">Vorname</label>
+                        <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="Vorname">
+                    -->
+                    </div>
+                    
+                    
+                    <!-- FAMILYNAME -->
+                    <div class="form-group mt-2">
+                        <label for="familyName" class="text-light">Nachname</label>
+                        <input type="text" class="form-control" id="familyNameInput" aria-describedby="familyNameHelp" placeholder="Nachname">
+                    </div>
+                    <!-- USERNAME -->
+                    <div class="form-group mt-2">
+                        <label for="usernameInput" class="text-light">Benutzerkonto</label>
+                        <input type="username" class="form-control" id="usernameInput" aria-describedby="usernameHelp" placeholder="Benutzerkonto">
+                    </div>
+                    <!-- EMAIL -->
+                    <div class="form-group mt-2">
+                        <label for="emailInput" class="text-light">Email</label>
+                        <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email">
+                        <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                    </div>
+                    <!-- PASSWORD -->
+                    <div class="form-group mt-2">
+                        <label for="passwordInput1" class="text-light">Kennwort</label>
+                        <input type="password" class="form-control" id="passwordInput1" placeholder="Kennwort">
+                    </div>
+                    <!-- REPEAT PASSWORD -->
+                    <div class="form-group mt-2">
+                        <label for="passwordInput2" class="text-light">Wiederhole Kennwort</label>
+                        <input type="password" class="form-control" id="passwordInput2" placeholder="Wiederhole Kennwort">
+                    </div>
+                    <!-- SECRET QUESTION -->
+                    <div class="form-group mt-2">
+                        <label for="secretQuestionInput" class="text-light">Geheime Frage</label>
+                        <input type="text" class="form-control" id="secretQuestionInput" placeholder="Geheime Frage">
+                    </div>
+                    <!-- SECRET ANSWER -->
+                    <div class="form-group mt-2">
+                        <label for="secretAnswerInput" class="text-light">Geheime Antwort</label>
+                        <input type="text" class="form-control" id="secretAnswerInput" placeholder="Geheime Antwort">
+                    </div>
+                        <!--<button type="submit" class="btn btn-primary">Submit</button>--> {% endcomment %}
+                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Schließen</button>
+                        <button type="submit" class="btn btn-outline-light">Registrieren</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

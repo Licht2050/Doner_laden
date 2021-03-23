@@ -3,7 +3,8 @@ find out the name of running docker: #docker ps
 then execute: docker exec -it "docker name without cotation" bash
 now mysql commond: # mysql -u "username without cotation" -p
 
-
+create django project using docker: 
+    sudo docker-compose run web django-admin startproject DonerLaden .
 
 docker-compose run web python3 manage.py showmigrations
 

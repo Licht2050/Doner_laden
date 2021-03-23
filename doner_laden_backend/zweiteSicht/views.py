@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Mitarbeiter, Rohe_Produkt
 from .forms import KundeForm
-from .models import Kunde
+from .models import Kunde, GeheimeFA
 
 # Create your views here.
 
@@ -36,8 +36,9 @@ def tes_view(request):
         pswd = request.POST['pswd']
         geheim_f = request.POST['gehim_frage']
         geheim_a = request.POST['gehim_answer']
-        
-        Kunde(vorname=vorname, nachname=nachname, benutzer_name=benutzer_name, email_add=email_add, pswd=pswd).save()
+        se=GeheimeFA(geheime_frage=geheim_f, geheime_antwort=geheim_a)
+        se.save()
+        Kunde(vorname=vorname, nachname=nachname, benutzer_name=benutzer_name, email_add=email_add, pswd=pswd, geheimeFA=se).save()
         
     return render(request, 'register.html', {"personen":fm})
     # return HttpResponse("<h1>%s %s %s</h1>" %(ls.name, ls.lastName, ls.address))

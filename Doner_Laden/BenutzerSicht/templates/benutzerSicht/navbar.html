@@ -1,0 +1,47 @@
+
+{% load static %}
+<!-- NAVBAR-->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand text-light ms-5" href="#">
+            <img src="{% static 'benutzerSicht/images/logo_images/logo3.png' %}" alt="Halder's Kebab"><p class="h3 d-inline halder-title align-middle"> HALDER'S KEBAB</p></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="nav justify-content-end mt-2">
+            <li class="nav item">
+                <div class="dropdown show">
+                    <a class="nav-link link-light dropdown-toggle halder-title h5" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Produkte
+                    </a>
+                  
+                    <!-- DROPDOWN MENU ITEMS -->
+                    <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Döner</a>
+                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Pizza</a>
+                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Salat</a>
+                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Getränke</a>
+                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Dessert</a>
+                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Beilagen</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav item">
+                <a class="nav-link text-light halder-title h5" href="#for_us">Über uns</a>
+            </li>
+            <li class="nav item">
+                <a class="nav-link text-light halder-title h5" href="#" data-dismiss="modal" data-toggle="modal" data-target="#contactModal">Kontakt</a>
+            </li>
+            <!-- EINKAUFSWAGEN-->
+            <li class="nav item me-2">
+                <a class="nav-link text-light halder-title h5" href="#" data-dismiss="modal" data-toggle="modal" data-target="#summaryOrderModal">Einkaufswagen
+                    <!-- COUNTER ORDERED PRODUCT'S BADGE -->
+                    <span class="badge bg-danger align-top">8</span>
+                </a>
+            </li>
+            <li class="nav item">
+                <a class="btn btn-outline-light halder-title h5 me-5" data-toggle="modal" data-target="#loginModal" href="#">Anmelden</a>
+            </li>
+        </ul>
+    </div>
+</nav>
