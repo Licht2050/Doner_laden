@@ -12,11 +12,15 @@
             {% csrf_token %}
             {% for field in regForm %}
     
-                <div class="text-light mt-2">
-                    {{ field | as_crispy_field }}
-                </div>
+            <div class="text-light mt-2">
+                {% comment %}{{ field | as_crispy_field }}{% endcomment %}
+                
+                {{ field | as_crispy_field}}
+                
+            </div>
                 
             {% endfor %}
+           
             {% if regForm.errors %}
     
                 <div class="row text-light">
@@ -26,6 +30,7 @@
                 </div>
     
             {% endif %}
+            
             <div class="mt-2 mb-3">
                 <a class="btn btn-outline-danger" href="{% url 'home' %}">Zurück</a>
                 <button type="submit" class="btn btn-outline-light" name="registration" id="registration">Registrieren</button>
