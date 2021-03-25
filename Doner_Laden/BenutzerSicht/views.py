@@ -5,23 +5,6 @@ from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
-def loginValid(request):
-    if request.method == "POST":
-        loginform = LoginForm(request.POST)
-        uname = request.POST.get('username')
-        pwd = request.POST.get('pswd')
-        if loginform.is_valid():
-            if uname is not None and pwd:
-                user = authenticate(request ,username=uname, password=pwd)
-                if user is not None:
-                    login(request, user)
-                    redirect("home")
-                else:
-                    print("Login failed!")
-    else:
-        loginform = LoginForm()
-    return render(request, 'benutzerSicht/html_modals/login_modal.html',{'loginForm':loginform})
-
 # def registerUser(request):
     
 #     if request.method == "POST":
@@ -42,6 +25,26 @@ def loginValid(request):
 #         loginForm = LoginForm()
 #     return render(request, 'benutzerSicht/html_modals/registration_modal.html',{'regForm':form, 'loginForm': loginForm})
 
+def home(request):
+    return render(request, 'benutzerSicht/index.html')
+
+def loginUser(request):
+    if request.method == "POST":
+        loginform = LoginForm(request.POST)
+        uname = request.POST.get('username')
+        pwd = request.POST.get('pswd')
+        if loginform.is_valid():
+            if uname is not None and pwd:
+                user = authenticate(request ,username=uname, password=pwd)
+                if user is not None:
+                    login(request, user)
+                    redirect("home")
+                else:
+                    print("Login failed!")
+    else:
+        loginform = LoginForm()
+    return render(request, 'benutzerSicht/login.html',{'loginForm':loginform})
+
 def registerUser(request):
     
     if request.method == "POST":
@@ -54,7 +57,5 @@ def registerUser(request):
     else:
         form = RegistrationsForm()
         
-    return render(request, 'benutzerSicht/html_modals/registration_modal.html',{'regForm':form})
+    return render(request, 'benutzerSicht/registration.html',{'regForm':form})
 
-def home(request):
-    return render(request, 'benutzerSicht/home.html')
