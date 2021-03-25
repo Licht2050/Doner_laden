@@ -1,0 +1,68 @@
+<!-- ORDER SUMMARY MODAL-->
+<div class="modal fade" id="summaryOrderModal" tabindex="-1" role="dialog" aria-labelledby="summaryOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h3 class="modal-title text-light halder-title" id="summaryOrderModalLabel">Aktive Bestellung</h3>
+            </div>
+            <div class="modal-body">
+                <!-- ORDER LIST -->
+                <form>
+                    <div>
+                        <h5 class="text-light">Anzahl Produkte: <span class="halder-price h4 ms-1 text-danger">8</span></h5>
+                    </div>
+                    <div>
+                        <ul class="list-group price-menu-ul">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="halder-price h5 text-danger">1</span>
+                                    <span class="text-light mx-2">x</span>
+                                    <b class="halder-title text-light h4">XXL Doener: </b>
+                                    
+                                </div>
+                                <div class="d-inline">
+                                    <span class="halder-price h5 pe-2 text-danger">29.99 Euro</span>
+                                    <a class="btn btn-outline-light" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#">+</a>
+                                    <a class="btn btn-outline-danger" role="button" href="#">x</a>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center mt-2">
+                                <div>
+                                    <span class="halder-price h5 text-danger">2</span>
+                                    <span class="text-light mx-2">x</span>
+                                    <b class="halder-title text-light h4">Pizza Hawai: </b>
+                                    
+                                </div>
+                                <div class="d-inline">
+                                    <span class="halder-price h5 pe-2 text-danger">19.99 Euro</span>
+                                    <a class="btn btn-outline-light" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#">+</a>
+                                    <a class="btn btn-outline-danger" role="button" href="#">x</a>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center mt-2">
+                                <div>
+                                    <span class="halder-price h5 text-danger">5</span>
+                                    <span class="text-light mx-2">x</span>
+                                    <b class="halder-title text-light h4">Coca-Cola: </b>
+                                </div>
+                                <div class="d-inline">
+                                    <span class="halder-price h5 pe-2 rounded text-danger">9.99 Euro</span>
+                                    <a class="btn btn-outline-light" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#">+</a>
+                                    <a class="btn btn-outline-danger" role="button" href="#">x</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-light mt-3 float-end pe-1"><b>Gesamt Betrag: </b><span class="text-danger">59.97 Euro</span></h5>
+                    </div>
+                        <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Schließen</button>
+                <button type="submit" class="btn btn-outline-light" data-dismiss="modal" data-toggle="modal" data-target="#">Bestellen</button>
+            </div>
+        </div>
+    </div>
+</div>

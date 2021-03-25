@@ -1,42 +1,33 @@
 from django.core.exceptions import ValidationError
 from django import forms
-from .models import Kunde
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
+class RegistrationsForm(UserCreationForm): 
+    email = forms.EmailField(label='Email',widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "username", "email", "password1", "password2"]
+    def clean_username(self):
+       uname = self.cleaned_data.get('username')
+       if uname == 'henri':
+           raise ValidationError("Fehler beim Username")     
 
-class KundeForm(forms.Form):
-    vorname = forms.CharField(max_length=200, label='Vorname', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    nachname = forms.CharField(max_length=200, label='Nachname', widget=forms.TextInput(attrs={'class': 'form-control'}))  
-    benutzer_name = forms.CharField(max_length=200, label='Benutzername', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    email_add = forms.EmailField(label='Email',widget=forms.EmailInput(attrs={'class': 'form-control'}))
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=200, label='Benutzername', widget=forms.TextInput(attrs={'class': 'form-control'}))
     pswd = forms.CharField(label='Kennwort',widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    pswd_wdh = forms.CharField(label='Wiederhole Kennwort', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    gehim_frage = forms.CharField(label='Geheime Frage', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    gehim_answer = forms.CharField(label='Geheime Antwort', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    #password felder mit einander vergleichen.
-    # def clean(self):
-    #     valpswd = self.cleaned_data['pswd']
-    #     valpswd_wdh = self.cleaned_data['pswd_wdh']
-    #     if valpswd != valpswd_wdh:
-    #         raise forms.ValidationError('kennwort stimmen nicht ueberein!')
 
-    # class Meta:
-    #     model = Kunde
-    #     fields = ['vorname', 'nachname', 'benutzer_name', 'email_add', 'pswd', 'geheimeFA']
+    # def clean(self, request):
+    #     uname = self.cleaned_data.get('username')
+    #     pwd = self.cleaned_data.get('pswd')
+    #     print("No entry!--------------------------")
+    #     #if uname is not None and pwd:
+    #     user = authenticate(request ,username=uname, password1=pwd)
+    #     if user is None:
+    #         print("No entry!--------------------------")
+    #     print("No entry!--------------------------")
+    #     print(user.name)
+    #     return self.cleaned_data
     
-    # def clean_pswd(self):
-    #     pswd = self.cleaned_data.get('pswd')
-    #     if len(pswd) < 8:
-    #         #self.errors['pswd'] = self.error_class(['kennwort stimmen nicht ueberein!'])
-    #         raise forms.ValidationError("kennwort stimmen nicht ueberein!") 
-    #     return pswd
-
-    def clean_vorname(self):
-        data = super(KundeForm, self).clean()
-        print(data.get('vorname'))
-        if 'halder' in data.get('vorname'):
-            print("Test False----------------- ")
-            self.add_error('vorname', "passwords do not match !")
-            raise forms.ValidationError("Test False----------------- ")
-        return data
-

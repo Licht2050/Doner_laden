@@ -1,57 +1,60 @@
-from django.shortcuts import render
-from .forms import KundeForm
-from .models import Kunde, GeheimeFA
-from django.contrib import messages
+from django.shortcuts import render, redirect
+from .forms import RegistrationsForm, LoginForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
+
 # Create your views here.
 
-def benutzerSicht(request):
-    #fm = KundeForm()
-    # if request.method == 'POST':
-    #     kundenForm = KundeForm(request.POST)
-    #     if kundenForm.is_valid():
-    #         pass  # does nothing, just trigger the validation
+def loginValid(request):
     if request.method == "POST":
-        fm = KundeForm()
-        vorname = request.POST['vorname']
-        nachname = request.POST['nachname']
-        benutzer_name = request.POST['benutzer_name']
-        email_add = request.POST['email_add']
-        pswd = request.POST['pswd']
-        geheim_f = request.POST['gehim_frage']
-        geheim_a = request.POST['gehim_answer']
-        se=GeheimeFA(geheime_frage=geheim_f, geheime_antwort=geheim_a)
-        kundenForm = KundeForm(request.POST)
-        if kundenForm.is_valid():
-            se.save()
-            Kunde(vorname=vorname, nachname=nachname, benutzer_name=benutzer_name, email_add=email_add, pswd=pswd, geheimeFA=se).save()            
-        else:
-            return render(request, 'benutzerSicht/index_base.html',{'kundenForm':fm})
+        loginform = LoginForm(request.POST)
+        uname = request.POST.get('username')
+        pwd = request.POST.get('pswd')
+        if loginform.is_valid():
+            if uname is not None and pwd:
+                user = authenticate(request ,username=uname, password=pwd)
+                if user is not None:
+                    login(request, user)
+                    redirect("home")
+                else:
+                    print("Login failed!")
     else:
-        fm = KundeForm(None)
-        return render(request, 'benutzerSicht/index_base.html',{'kundenForm':fm})
-    # return HttpResponse("<h1>%s %s %s</h1>" %(ls.name, ls.lastName, ls.address))
+        loginform = LoginForm()
+    return render(request, 'benutzerSicht/html_modals/login_modal.html',{'loginForm':loginform})
 
-
-def tes_view(request):
-    fm = KundeForm()
-    #ls = Mitarbeiter.objects.all().order_by("name")
-    if request.method == "POST":
-        formm = KundeForm(request.POST)
-        if formm.is_valid():
-            print("Successfull--------------------------------")
-
+# def registerUser(request):
     
-    # if request.method == "POST":
-    #     kunde = KundeForm(request.POST)
-    #     if kunde.is_valid():
-    #         vorname = request.POST['vorname']
-    #         nachname = request.POST['nachname']
-    #         benutzer_name = request.POST['benutzer_name']
-    #         email_add = request.POST['email_add']
-    #         pswd = request.POST['pswd']
-    #         geheim_f = request.POST['gehim_frage']
-    #         geheim_a = request.POST['gehim_answer']
-    #         se=GeheimeFA(geheime_frage=geheim_f, geheime_antwort=geheim_a)
-    #         se.save()
-    #         Kunde(vorname=vorname, nachname=nachname, benutzer_name=benutzer_name, email_add=email_add, pswd=pswd, geheimeFA=se).save()   
-    return render(request, 'register.html', {"personen":fm})
+#     if request.method == "POST":
+#         loginForm = LoginForm(request.POST, request)
+#         form = RegistrationsForm(request.POST)
+#         if 'registration' in request.POST:
+#             if form.is_valid():
+#                 form.save()
+#                 return redirect("home")
+#         if loginForm.is_valid():
+#             print("Login Form vor pruefen No entry!--------------------------")
+#             loginValid(request)
+#             print("Login Form nach pruefen No entry!--------------------------")
+        
+        
+#     else:
+#         form = RegistrationsForm()
+#         loginForm = LoginForm()
+#     return render(request, 'benutzerSicht/html_modals/registration_modal.html',{'regForm':form, 'loginForm': loginForm})
+
+def regTest(request):
+    
+    if request.method == "POST":
+        form = RegistrationsForm(request.POST)
+        if 'registration' in request.POST:
+            if form.is_valid():
+                form.save()
+                return redirect("home")
+        
+    else:
+        form = RegistrationsForm()
+        
+    return render(request, 'benutzerSicht/html_modals/registration_modal.html',{'regForm':form})
+
+def home(request):
+    return render(request, 'benutzerSicht/home.html')

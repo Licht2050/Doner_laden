@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> ![endif]-->
+<html>
+    {% load static %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" href="{% static 'benutzerSicht/images/logo_images/logo_fav.ico' %}" type="icon">
+        <title>Halder's Kebab</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'benutzerSicht/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'benutzerSicht/style.css' %}">
+    </head>
+    <body class="bg-dark">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://www.google.com/search?q=browser&sxsrf=ALeKk03_Nx5KbfYxAQ538cbC884JnFWs9Q%3A1616291847996&source=hp&ei=B6hWYKbJOo74U4CZlDA&iflsig=AINFCbYAAAAAYFa2F5kOabQVE2FBO5S9zGkZWZnB-TJB&oq=browser&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUILhDLATIFCAAQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBOgQIIxAnOgIIADoICC4QxwEQrwE6AgguOggILhDHARCjAlD-BljEEWDKEmgAcAB4AYAB3gGIAfMGkgEFMS40LjGYAQCgAQGqAQdnd3Mtd2l6&sclient=gws-wiz&ved=0ahUKEwjm6M2rpMDvAhUO_BQKHYAMBQYQ4dUDCAg&uact=5">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- NAVBAR-->
+        {% include "benutzerSicht/navbar.html" %}
+
+        <!-- LOGIN MODAL-->
+        {% include "benutzerSicht/html_modals/login_modal.html" %}
+
+        <!-- REGISTRATION MODAL -->
+        {% include "benutzerSicht/html_modals/registration_modal.html" %}
+
+        <!-- CONTACT MODAL -->
+        {% include "benutzerSicht/html_modals/contact_modal.html" %}
+
+        <!-- ORDER MODAL -->
+        {% include "benutzerSicht/html_modals/order_modal.html" %}
+
+        <!-- ORDER SUMMARY MODAL -->
+        {% include "benutzerSicht/html_modals/order_summary_modal.html" %}
+
+        <!-- PRODUCT VIEW CARDS -->
+        {% include "benutzerSicht/product_view_cards.html" %}
+
+        <!-- PRODUCT LIST PRICE -->
+        {% include "benutzerSicht/product_list_price.html" %}
+
+        <!-- FOR US -->
+        {% include "benutzerSicht/for_us.html" %}
+
+        <!-- FOOTER -->
+        {% include "benutzerSicht/footer.html" %}
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="{% static 'benutzerSicht/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'benutzerSicht/main.js' %}"></script>
+    </body>
+</html>

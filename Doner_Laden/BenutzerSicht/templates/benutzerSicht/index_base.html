@@ -24,10 +24,12 @@
         {% include "benutzerSicht/navbar.html" %}
 
         <!-- LOGIN MODAL-->
-        {% include "benutzerSicht/html_modals/login_modal.html" %}
+        {% block LOGIN_FORM %}{% endblock LOGIN_FORM %}
+        {% comment %} {% include "benutzerSicht/html_modals/login_modal.html" %} {% endcomment %}
 
         <!-- REGISTRATION MODAL -->
-        {% include "benutzerSicht/html_modals/registration_modal.html" %}
+        {% block REGISTRATION_FORM %}{% endblock REGISTRATION_FORM %}
+        {% comment %} {% include "benutzerSicht/html_modals/registration_modal.html" %} {% endcomment %}
 
         <!-- CONTACT MODAL -->
         {% include "benutzerSicht/html_modals/contact_modal.html" %}
@@ -39,13 +41,17 @@
         {% include "benutzerSicht/html_modals/order_summary_modal.html" %}
 
         <!-- PRODUCT VIEW CARDS -->
-        {% include "benutzerSicht/product_view_cards.html" %}
+        {% block PRODUCT_VIEW_CARDS %}{% endblock PRODUCT_VIEW_CARDS %}
+        {% comment %} {% include "benutzerSicht/product_view_cards.html" %} {% endcomment %}
 
+        {% block HOME %}{% endblock HOME %}
         <!-- PRODUCT LIST PRICE -->
-        {% include "benutzerSicht/product_list_price.html" %}
+        {% block PRODUCT_LIST %}{% endblock PRODUCT_LIST %}
+        {% comment %} {% include "benutzerSicht/product_list_price.html" %} {% endcomment %}
 
         <!-- FOR US -->
-        {% include "benutzerSicht/for_us.html" %}
+        {% block FOR_US %}{% endblock FOR_US %}
+        {% comment %} {% include "benutzerSicht/for_us.html" %} {% endcomment %}
 
         <!-- FOOTER -->
         {% include "benutzerSicht/footer.html" %}

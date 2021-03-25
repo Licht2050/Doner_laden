@@ -1,0 +1,14 @@
+
+
+{% if regForm.errors %}
+    <div class="row text-light">
+        {% for field_with_error,error_messages in regForm.errors.items %}
+            <div class="alert alert-danger">{{field_with_error}}  {{error_messages}}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+
+https://django.cowhite.com/blog/adding-and-editing-model-objects-using-django-class-based-views-and-forms/
