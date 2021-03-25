@@ -42,7 +42,7 @@ def loginValid(request):
 #         loginForm = LoginForm()
 #     return render(request, 'benutzerSicht/html_modals/registration_modal.html',{'regForm':form, 'loginForm': loginForm})
 
-def regTest(request):
+def registerUser(request):
     
     if request.method == "POST":
         form = RegistrationsForm(request.POST)
