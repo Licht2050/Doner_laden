@@ -1,23 +1,28 @@
 {% extends 'benutzerSicht/index_base.html' %}
 {% block LOGIN_FORM %}
-    <div style="width: 40%" class="mx-auto">
-        <h3 class="text-light halder-title ms-2">Registrierung</h3>
+
+<!-- LOGIN FORM -->
+<div class="login_layer_outer container w-25 rounded">
+    <div class="mx-auto p-2">
+        <h3 class="text-light halder-title ms-2">Anmelden</h3>
+        <hr class="bg-light">
         <form method="post" class="form-group container">
-            <!-- LOGIN FORM -->
-            <form method="post">
-                {% csrf_token %}
-                {% for field in loginForm %}
-                    <div class="text-light mt-1">
-                        {{ field.label_tag }}  
-                    </div>
-                    {{ field }}
-                {% endfor %}
-            </div>
-            <div>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Schließen</button>
-                <button type="button" class="btn btn-outline-warning" data-dismiss="modal" data-toggle="modal" data-target="#registrationModal">Registrieren</button>
-                <button type="submit" class="btn btn-outline-light" name="login">Anmelden</button>
-            </div>
+
+            {% csrf_token %}
+            {% for field in loginForm %}
+                <div class="text-light mt-1">
+                    {{ field.label_tag }}  
+                </div>
+                {{ field }}
+            {% endfor %}
+        
+        <div class="mt-3 mb-3">
+            <a class="btn btn-outline-danger" href="{% url 'home' %}">Zurück</a>
+            <a class="btn btn-outline-light" href="">Registrieren</a>
+            <button type="submit" class="btn btn-outline-light" name="login">Anmelden</button>
+        </div>
         </form>
     </div>
+</div>
+
 {% endblock LOGIN_FORM %}
