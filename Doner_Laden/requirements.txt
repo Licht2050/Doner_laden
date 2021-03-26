@@ -1,7 +1,0 @@
-Django
-mysqlclient
-django-mysql
-djangorestframework
-django-cors-headers
-pillow
-django-crispy-forms
