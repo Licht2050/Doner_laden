@@ -15,11 +15,6 @@
     font-weight: bold;
 }
 
-/* Registration classes */
-.registration_layer_outer, .login_layer_outer {
-    background-color: #2d2f31;
-}
-
 /* FOOT INFORMATION */
 .foot-info {
     background-color: #2d2f31;

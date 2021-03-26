@@ -1,7 +1,15 @@
 {% extends 'benutzerSicht/index_base.html' %}
-
-    {% block INDEX %}
+{% block TITLE %}Halder's Kebab{% endblock TITLE %}
+    
+{% block INDEX %}
     <!-- CAROUSEL -->
+    <div class="text-light">
+        {% if user.is_authenticated %}
+            Guten Morgen {{ user.username }}!
+        {% else %}
+            <p>Sie sind nicht angemeldet<p>
+        {% endif %}
+    <div>
     {% include "benutzerSicht/carousel.html" %}
 
     <!-- PRODUCT VIEW CARDS -->

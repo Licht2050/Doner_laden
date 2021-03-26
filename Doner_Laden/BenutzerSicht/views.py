@@ -1,7 +1,10 @@
+
 from django.shortcuts import render, redirect
 from .forms import RegistrationsForm, LoginForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
+#from django.core.exceptions import ValidationError
+from django import forms
 
 # Create your views here.
 
@@ -38,9 +41,10 @@ def loginUser(request):
                 user = authenticate(request ,username=uname, password=pwd)
                 if user is not None:
                     login(request, user)
-                    redirect("home")
+                    return render(request, 'benutzerSicht/index.html',{'user':user})
                 else:
                     print("Login failed!")
+                    #raise forms.ValidationError("Login Faild!")
     else:
         loginform = LoginForm()
     return render(request, 'benutzerSicht/login.html',{'loginForm':loginform})
@@ -59,3 +63,4 @@ def registerUser(request):
         
     return render(request, 'benutzerSicht/registration.html',{'regForm':form})
 
+# def logoutUser(request):
