@@ -31,16 +31,10 @@ from django.core.mail import send_mail
 #     return render(request, 'benutzerSicht/html_modals/registration_modal.html',{'regForm':form, 'loginForm': loginForm})
 
 def home(request):
-    # send_mail(
-    #     "Halder's Kebab",
-    #     "Der Bratan hat hunger!",
-    #     "halder_kebab@abv.bg",
-    #     ['geokehaiov@gmail.com'],
-    #     fail_silently=False,
-    # )
-
+    
     if request.method == "POST":
         contact_me_form = ContactMeForm(request.POST)
+        
         email = request.POST.get('user_email')
         title = request.POST.get('message_title')
         message = request.POST.get('message')
@@ -48,9 +42,16 @@ def home(request):
         if "contact_me_form" in request.POST:
             if contact_me_form.is_valid():
                 contact_me_form.save()
-                return redirect("home")
 
-        print("EMAIL: " + email + " TITLE: " + title + " MESSAGE: " + message)
+                # send_mail(
+                #     "title,
+                #     message,
+                #     email,
+                #     ['geokehaiov@gmail.com'],
+                #     fail_silently=False,
+                # )
+                
+                return redirect("home")
 
     contactMeForm = ContactMeForm()
 
