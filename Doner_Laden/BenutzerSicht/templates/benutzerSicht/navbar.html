@@ -9,47 +9,29 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="nav justify-content-end mt-2">
-            <!--
             <li class="nav item">
-                <div class="dropdown show">
-                    <a class="nav-link link-light dropdown-toggle halder-title h5" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Produkte
-                    </a>
-                  
-                     DROPDOWN MENU ITEMS
-                    <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Döner</a>
-                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Pizza</a>
-                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Salat</a>
-                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Getränke</a>
-                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Dessert</a>
-                      <a class="dropdown-item bg-dark text-light halder-title" href="#products">Beilagen</a>
-                    </div>
-                </div>
-            </li>
-            -->
-            <li class="nav item">
-                <!--<a class="nav-link text-light halder-title h5" href="#for_us">Über uns</a>-->
-                
-                <a class="nav-link text-light halder-title h5" href="{% url 'home' %}#for_us">Über uns</a>
+                <a class="nav-link text-light halder-title h5" href="{% url 'home' %}#price_card">Card</a>
             </li>
             <li class="nav item">
-                <a class="nav-link text-light halder-title h5" href="#" data-dismiss="modal" data-toggle="modal" data-target="#contactModal">Kontakt</a>
+                <a class="nav-link text-light halder-title h5" href="{% url 'home' %}#for_us">For us</a>
+            </li>
+            <li class="nav item">
+                <a class="nav-link text-light halder-title h5" href="#" data-dismiss="modal" data-toggle="modal" data-target="#contactModal">Contact</a>
             </li>
             <!-- EINKAUFSWAGEN-->
             <li class="nav item me-2">
-                <a class="nav-link text-light halder-title h5" href="#" data-dismiss="modal" data-toggle="modal" data-target="#summaryOrderModal">Einkaufswagen
+                <a class="nav-link text-light halder-title h5" href="#" data-dismiss="modal" data-toggle="modal" data-target="#summaryOrderModal">Korb
                     <!-- COUNTER ORDERED PRODUCT'S BADGE -->
                     <span class="badge bg-danger align-top">8</span>
                 </a>
             </li>
             <li class="nav item">
-                {% comment %} <a class="btn btn-outline-light halder-title h5 me-5" data-toggle="modal" data-target="#loginModal" href="{% url 'login' %}">Anmelden</a> {% endcomment %}
+                {% comment %} <a class="btn btn-outline-light halder-title h5 me-5" data-toggle="modal" data-target="#loginModal" href="{% url 'login' %}">Login</a> {% endcomment %}
                 
                 {% if user.is_authenticated %}
-                    <a class="btn btn-outline-light halder-title h5 me-5" href="{% url 'login' %}">Abmelden</a>
+                    <a class="btn btn-outline-light halder-title h5 me-5" href="{% url 'login' %}">Logout</a>
                 {% else %}
-                    <a class="btn btn-outline-light halder-title h5 me-5" href="{% url 'login' %}">Anmelden</a>
+                    <a class="btn btn-outline-light halder-title h5 me-5" href="{% url 'login' %}">Login</a>
                 {% endif %}
                 
             </li>
