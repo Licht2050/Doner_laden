@@ -3,8 +3,8 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Product
-from .models import ContactMe
+from .models import Product, ContactMe, Order, ProductCounter
+
 
 
 class RegistrationsForm(UserCreationForm): 
@@ -56,4 +56,19 @@ class ContactMeForm(forms.ModelForm):
     message_title = forms.CharField(label='Title', max_length=70)
     # message
     message = forms.Textarea()
+
+class ProductCounterForm(forms.ModelForm):
+
+    class Meta:
+        model = ProductCounter
+        fields = ['quantity']
+
+class OrderForm(forms.ModelForm):
+    
+    class Meta:
+        model = Order
+        fields = [ 'description']
+        child_model = ProductCounter
+        # child_form_class = ProductCounterForm
+        child_fields = ['quantity']
 

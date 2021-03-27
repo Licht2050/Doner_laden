@@ -21,3 +21,8 @@ to go mysql
 docker-compose exec web sh
 
 docker exec -it doner_laden_backend_db_1 bash
+
+
+
+for Modal:		https://pypi.org/project/django-bootstrap-modal-forms/
+
