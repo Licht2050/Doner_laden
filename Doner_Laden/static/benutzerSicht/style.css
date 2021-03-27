@@ -9,7 +9,11 @@
     font-family:'Times New Roman', Times, serif;
 }
 
-/* Login modal title text */
+/* Login modal*/
+.login_layer_outer, .registration_layer_outer {
+    background-color: #383b41;
+}
+
 .login-text {
     font-size: larger;
     font-weight: bold;

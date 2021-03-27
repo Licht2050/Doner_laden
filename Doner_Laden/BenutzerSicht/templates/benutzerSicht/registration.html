@@ -13,11 +13,8 @@
             {% csrf_token %}
             {% for field in regForm %}
     
-            <div class="text-light mt-2">
-                {% comment %}{{ field | as_crispy_field }}{% endcomment %}
-                
+            <div class="text-light mt-2">                
                 {{ field | as_crispy_field}}
-                
             </div>
                 
             {% endfor %}
