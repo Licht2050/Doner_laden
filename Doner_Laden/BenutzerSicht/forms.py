@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import ContactMe
 
 
 class RegistrationsForm(UserCreationForm): 
@@ -26,6 +27,7 @@ class RegistrationsForm(UserCreationForm):
         except Exception as e:
             return uname
         raise forms.ValidationError(f"Username {uname} ist schon vorhanden!")
+
 class LoginForm(forms.ModelForm):
     password = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     
@@ -48,3 +50,16 @@ class LoginForm(forms.ModelForm):
     #                 raise  forms.ValidationError("Login Vaild")
     #     return self.cleaned_data
     
+class ContactMeForm(forms.ModelForm):
+
+    class Meta:
+        model = ContactMe
+        fields = ['user_email', 'message_title', "message"]
+
+    # User's email
+    user_email = forms.EmailField(label='Email')
+    # title
+    message_title = forms.CharField(label='Title', max_length=70)
+    # message
+    message = forms.Textarea()
+

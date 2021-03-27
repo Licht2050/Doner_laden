@@ -1,10 +1,12 @@
 
 from django.shortcuts import render, redirect
-from .forms import RegistrationsForm, LoginForm
+from .forms import RegistrationsForm, LoginForm, ContactMeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 #from django.core.exceptions import ValidationError
 from django import forms
+
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -29,7 +31,30 @@ from django import forms
 #     return render(request, 'benutzerSicht/html_modals/registration_modal.html',{'regForm':form, 'loginForm': loginForm})
 
 def home(request):
-    return render(request, 'benutzerSicht/index.html')
+    # send_mail(
+    #     "Halder's Kebab",
+    #     "Der Bratan hat hunger!",
+    #     "halder_kebab@abv.bg",
+    #     ['geokehaiov@gmail.com'],
+    #     fail_silently=False,
+    # )
+
+    if request.method == "POST":
+        contact_me_form = ContactMeForm(request.POST)
+        email = request.POST.get('user_email')
+        title = request.POST.get('message_title')
+        message = request.POST.get('message')
+
+        if "contact_me_form" in request.POST:
+            if contact_me_form.is_valid():
+                contact_me_form.save()
+                return redirect("home")
+
+        print("EMAIL: " + email + " TITLE: " + title + " MESSAGE: " + message)
+
+    contactMeForm = ContactMeForm()
+
+    return render(request, 'benutzerSicht/index.html', {'ContactMeForm':contactMeForm})
 
 def loginUser(request):
     if request.method == "POST":
