@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Product
+from .models import ContactMe
 
 
 class RegistrationsForm(UserCreationForm): 
@@ -42,4 +43,17 @@ class LoginForm(forms.ModelForm):
             if uname is not None and pwd:
                 if not authenticate(username=uname, password=pwd):
                     raise forms.ValidationError("Invalid Login")
+ 
+class ContactMeForm(forms.ModelForm):
+
+    class Meta:
+        model = ContactMe
+        fields = ['user_email', 'message_title', "message"]
+
+    # User's email
+    user_email = forms.EmailField(label='Email')
+    # title
+    message_title = forms.CharField(label='Title', max_length=70)
+    # message
+    message = forms.Textarea()
 

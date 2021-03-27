@@ -10,6 +10,6 @@ urlpatterns = [
     path('/login', views.loginUser, name='login'),
     path('/logout', views.logoutUser, name='logout'),
     path('/registration', views.registerUser, name='registration'),
-    path('/products', views.ProductView_as_Catagories, name='product_price_list'),
+    #path('/products', views.ProductView_as_Catagories, name='product_price_list'),
     
 ]

@@ -1,11 +1,13 @@
 
 from django.shortcuts import render, redirect
-from .forms import RegistrationsForm, LoginForm
+from .forms import RegistrationsForm, LoginForm, ContactMeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 #from django.core.exceptions import ValidationError
 from django import forms
 from .models import Product, Catagory
+
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -33,11 +35,39 @@ def home(request):
     doner = Product.objects.get(name="XXL Doner")
     
     print(doner.catagory.description) 
-    return render(request, 'benutzerSicht/index.html', {'doner':doner})
+    
+
+    if request.method == "POST":
+        contact_me_form = ContactMeForm(request.POST)
+        
+        email = request.POST.get('user_email')
+        title = request.POST.get('message_title')
+        message = request.POST.get('message')
+
+        if "contact_me_form" in request.POST:
+            if contact_me_form.is_valid():
+                contact_me_form.save()
+
+                # send_mail(
+                #     "title,
+                #     message,
+                #     email,
+                #     ['geokehaiov@gmail.com'],
+                #     fail_silently=False,
+                # )
+                
+                return redirect("home")
+
+    contactMeForm = ContactMeForm()
+
+    return render(request, 'benutzerSicht/index.html', {'ContactMeForm':contactMeForm})
+    # return render(request, 'benutzerSicht/index.html', {'doner':doner})
 
 def logoutUser(request):
     logout(request)
     return redirect("home")
+    
+    
 
 def loginUser(request):
     if request.method == "POST":
