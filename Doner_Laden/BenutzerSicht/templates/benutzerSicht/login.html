@@ -9,7 +9,7 @@
         <form method="post" class="form-group container">
             {% csrf_token %}
             {% for field in loginForm %}
-                <div class="text-light mt-1" >
+                <div class="text-light mt-1">
                     {{ field.label_tag }} 
                 </div>
                 {{ field }}                        

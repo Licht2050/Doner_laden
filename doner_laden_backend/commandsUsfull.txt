@@ -12,3 +12,7 @@
 
 
 https://django.cowhite.com/blog/adding-and-editing-model-objects-using-django-class-based-views-and-forms/
+
+python manage.py syncdb 
+
+http://platforma-kooperativa.org/media/uploads/article-documents/beginning_django_e-commerce.pdf

@@ -43,7 +43,7 @@
                 {% comment %} <a class="btn btn-outline-light halder-title h5 me-5" data-toggle="modal" data-target="#loginModal" href="{% url 'login' %}">Anmelden</a> {% endcomment %}
                 
                 {% if user.is_authenticated %}
-                    <a class="btn btn-outline-light halder-title h5 me-5" href="{% url 'login' %}">Abmelden</a>
+                    <a class="btn btn-outline-light halder-title h5 me-5" href="{% url 'logout' %}">Abmelden</a>
                 {% else %}
                     <a class="btn btn-outline-light halder-title h5 me-5" href="{% url 'login' %}">Anmelden</a>
                 {% endif %}

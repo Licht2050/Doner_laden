@@ -4,15 +4,16 @@
     <hr class="bg-light"/>
     <div class="row">
         <div class="col">
+        {% csrf_token %}
             <div class="price-menu rounded pb-2">
                 <h2 class="text-center text-light mt-3 pt-3 halder-title">KEBAB</h2>
                 <ul class="list-group px-2 price-menu-ul text-light">
                     <li class="list-group-item d-flex justify-content-between align-items-center mt-2 rounded">
                         <div>
-                            <span class="text-light h5">XXL Doener </span>
+                            <span class="text-light h5">{{ doner.name }}</span>
                         </div>
                         <div class="d-inline">
-                            <span class="halder-price h5 p-1 pe-2 rounded text-danger">29.99 Euro</span>
+                            <span class="halder-price h5 p-1 pe-2 rounded text-danger">{{ doner.price }} </span>
                             <a class="btn btn-outline-light" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#">+</a>
                         </div>
                     </li>
