@@ -1,0 +1,18 @@
+{% extends 'benutzerSicht/index_base.html' %}
+
+{% block HOME %}
+
+    {% include "benutzerSicht/carousel.html" %}
+    <!-- PRODUCT VIEW CARDS -->
+    {% comment %} {% block PRODUCT_VIEW_CARDS %}{% endblock PRODUCT_VIEW_CARDS %} {% endcomment %}
+    {% include "benutzerSicht/product_view_cards.html" %}
+
+    <!-- PRODUCT LIST PRICE -->
+    {% comment %} {% block PRODUCT_LIST %}{% endblock PRODUCT_LIST %} {% endcomment %}
+    {% include "benutzerSicht/product_list_price.html" %}
+
+    <!-- FOR US -->
+    {% comment %} {% block FOR_US %}{% endblock FOR_US %} {% endcomment %}
+    {% include "benutzerSicht/for_us.html" %}
+
+{% endblock HOME %}

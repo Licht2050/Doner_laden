@@ -1,0 +1,27 @@
+{% extends 'benutzerSicht/index_base.html' %}
+{% block TITLE %}Halder's Kebab{% endblock TITLE %}
+    
+{% block INDEX %}
+    <!-- CAROUSEL -->
+    {% comment %} <div class="text-light">
+        {% if user.is_authenticated %}
+            Guten Morgen {{ user.username }}!
+        {% else %}
+            <p>Sie sind nicht angemeldet<p>
+        {% endif %}
+    <div> {% endcomment %}
+    {% include "benutzerSicht/carousel.html" %}
+
+    <!-- PRODUCT VIEW CARDS -->
+    {% include "benutzerSicht/product_view_cards.html" %} 
+
+    <!-- PRODUCT LIST PRICE -->
+    {% include "benutzerSicht/product_list_price.html" %}
+
+    <!-- FOR US -->
+    {% include "benutzerSicht/for_us.html" %}
+
+    <!-- FOOTER -->
+    {% include "benutzerSicht/footer.html" %}
+
+{% endblock INDEX %}

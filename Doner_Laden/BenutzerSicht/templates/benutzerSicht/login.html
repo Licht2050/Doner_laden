@@ -1,0 +1,32 @@
+{% extends 'benutzerSicht/index_base.html' %}
+{% block TITLE %}Anmelden{% endblock TITLE %}
+{% block LOGIN_FORM %}
+    {% load crispy_forms_tags %}
+    <!-- LOGIN FORM -->
+    <div class="login_layer_outer container w-25 rounded">
+        <div class="mx-auto p-2">
+            <h3 class="text-light halder-title ms-2">Anmelden</h3>
+            <hr class="bg-light">
+            <form method="post" class="form-group container">
+                {% csrf_token %}
+                {% for field in loginForm %}
+                    <div class="text-light mt-1">
+                        {{ field | as_crispy_field}}
+                    </div>                 
+                {% endfor %}
+                {% if loginForm.errors %}
+                    <div class="row text-light">
+                        {% for field_with_error,error_messages in loginForm.errors.items %}
+                            <div class="alert alert-danger">{{field_with_error}} {{error_messages}}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="mt-3 mb-3">
+                    <a class="btn btn-outline-danger" href="{% url 'home' %}">Close</a>
+                    <a class="btn btn-outline-light" href="{% url 'registration' %}">Registration</a>
+                    <button type="submit" class="btn btn-outline-light" name="login">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock LOGIN_FORM %}

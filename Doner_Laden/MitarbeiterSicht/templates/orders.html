@@ -1,0 +1,64 @@
+{% extends 'index_base.html' %}
+{% block ORDER %}
+{% load my_tags %}
+
+<h3>Active Orders </h3>
+<hr class="bg-light">
+<table  class="table table-bordered border-light text-light">
+  <thead>
+  </thead>
+  <tbody>
+      <!--for loop for cart-->
+      {% for crt in cart %}
+         {% if forloop.counter0|modulo:5 %}
+          <tr>
+        {% endif %}
+        <td>
+          <span>Order Identifier:</span> 
+          <span class="text-danger mx-1">{{ crt.id }}</span>
+          <hr class="bg-light">
+          <div class="text-dark">
+            <ul class="list-group list-group-flush">
+              <!--for loop for order-->
+              {% for order in crt.order.all %}
+                <li class="list-group-item bg-dark text-light"> 
+                  <span class="text-danger">{{ order.product_counter.quantity }}</span> 
+                  <span class="text-light mx-1">x</span>
+                  <span class="text-light h5">{{ order.product_counter }}</span>
+                </li>
+                
+                {% if not order.description %}
+                  <hr class="bg-light">
+                {% else %}
+                  <li class="list-group-item bg-dark text-danger">
+                    
+                    <span class="text-danger h5">Note:</span>
+                    <p class="text-warning">
+                    {{ order.description }}
+                    </p>
+                    
+                  </li>
+                  <hr class="bg-light">
+                {% endif %}
+              {% endfor %}
+
+            </ul>
+          <hr class="bg-light">
+          </div>
+          <div class="float-end">
+            <form method="POST">
+              {% csrf_token %}
+              <button class="btn btn-outline-success" type="submit" name="order_done" value="{{ crt.id }}">Done</button>
+            </form>
+          </div>
+        </td>
+
+        {% if  forloop.counter0|modulo:5 %}
+          </tr>
+        {% endif %}
+
+        {% endfor %}
+      
+  </tbody>
+</table>
+{% endblock ORDER %}

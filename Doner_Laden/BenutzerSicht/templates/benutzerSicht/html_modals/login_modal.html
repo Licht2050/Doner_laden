@@ -1,0 +1,23 @@
+{% extends 'benutzerSicht/index_base.html' %}
+{% block LOGIN_FORM %}
+    <div style="width: 40%" class="mx-auto">
+        <h3 class="text-light halder-title ms-2">Registrierung</h3>
+        <form method="post" class="form-group container">
+            <!-- LOGIN FORM -->
+            <form method="post">
+                {% csrf_token %}
+                {% for field in loginForm %}
+                    <div class="text-light mt-1">
+                        {{ field.label_tag }}  
+                    </div>
+                    {{ field }}
+                {% endfor %}
+            </div>
+            <div>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-warning" data-dismiss="modal" data-toggle="modal" data-target="#registrationModal">Registrieren</button>
+                <button type="submit" class="btn btn-outline-light" name="login">Login</button>
+            </div>
+        </form>
+    </div>
+{% endblock LOGIN_FORM %}

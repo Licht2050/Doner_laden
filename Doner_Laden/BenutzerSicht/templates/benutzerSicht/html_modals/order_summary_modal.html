@@ -1,0 +1,59 @@
+<!-- ORDER SUMMARY MODAL-->
+{% load mathfilters %}
+<div class="modal fade" id="summaryOrderModal" tabindex="-1" role="dialog" aria-labelledby="summaryOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h3 class="modal-title text-light halder-title" id="summaryOrderModalLabel">Aktive Bestellung</h3>
+            </div>
+            <div class="modal-body">
+                <!-- ORDER LIST -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div>
+                        <ul class="list-group price-menu-ul">
+                        {% for  prdCounter in  bestellung  %}
+                            {% if forloop.counter == 1 %}
+                                <div>
+                                    <h5 class="text-light">Product Quantity: <span class="halder-price h4 ms-1 text-danger">{{ productAnzahl }}</span></h5>
+                                </div>
+                            {% endif %} 
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="halder-price h5 text-danger">{{ prdCounter.product_counter.quantity }}</span>
+                                    <span class="text-light mx-2">x</span>
+                                    <b class="halder-title text-light h4">{{ prdCounter.product_counter.product }}: </b>
+                                    
+                                </div>
+                                <div class="d-inline">
+                                    <span class="halder-price h5 pe-2 text-danger">{{ prdCounter.product_counter.quantity |mul:prdCounter.product_counter.product.price }} Euro</span>
+                                    {% comment %} <a class="btn btn-outline-light building-link" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#orderModal" name="update"  value="{{ prdCounter.product_counter.product.id }}"
+                                        data-name='{{ prdCounter.product_counter.product.name }}'
+                                        data-id='{{ prdCounter.product_counter.product.id }}'
+                                        data-price='{{ prdCounter.product_counter.product.price }}'
+
+                                    >+</a> {% endcomment %}
+                                    <a class="btn btn-outline-danger" role="button" href='{% url "home"  prdCounter.product_counter.product.id %}'>x</a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-light mt-3 float-end pe-1"><b>Total Price: </b><span class="text-danger">{{ product_total_price }} Euro</span></h5>
+                    </div>
+                        <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    {% if user.is_authenticated %}
+                        <button type="submit" name="order_summery" class="btn btn-outline-light">Order</button>
+                    {% else %}
+                        <a class="btn btn-outline-light" href="{% url 'login' %}">Order</a>
+                    {% endif %}
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

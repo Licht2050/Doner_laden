@@ -1,0 +1,40 @@
+{% load crispy_forms_tags %}
+<!-- CONTACT MODAL -->
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h3 class="modal-title text-light halder-title" id="contactModalLabel">Send us message</h3>
+            </div>
+            <div class="modal-body">
+                <!-- CONTACT FORM -->
+                <form method="POST">
+                    
+                    {% csrf_token %}
+                    {% for field in ContactMeForm %}
+
+                        <div class="form-group mt-2 text-light">
+                            {{ field | as_crispy_field}}
+                        </div>
+                    
+                    {% endfor %}
+
+                    {% if ContactMeForm.errors %}
+
+                    <div class="row text-light">
+                        {% for field_with_error, error_messages in ContactMeForm.errors.items %}
+                            <div class="alert alert-danger">{{field_with_error}} {{error_messages}}</div>
+                        {% endfor %}
+                    </div>
+
+                    {% endif %}
+
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-light" name="contact_me_form">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

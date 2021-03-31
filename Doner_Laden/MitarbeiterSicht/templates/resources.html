@@ -1,0 +1,80 @@
+{% extends 'index_base.html' %}
+{% load my_tags %}
+{% block RESOURCES %}
+<h3 class="text-light">Product Status</h3>
+<hr class="bg-light">
+  <div class="row">
+    {% for catagory in resourceCatagory %}
+            <div class="col" style="width: 250px; max-width: 250px;">
+                <div class="price-menu rounded">
+                    <h4 class="text-center text-light pt-3 halder-title">{{ catagory }}</h4>
+                    <hr class="bg-light">
+                    <ul class="list-group px-2 price-menu-ul text-light">
+                        {% for product in resourceProduct|in_category:catagory %}  
+                          <li class="list-group-item bg-dark text-light w-100 text-center">
+                            <h5 class="d-inline-flex text-truncate text-center price-menu-ul">{{ product.name }}</h5>
+                          </li>
+                          <div>
+                            <div class="progress mt-1">
+                            {% if product.quantity <= 25 %}
+                              <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{ product.quantity }}%;"  aria-valuemin="0" aria-valuemax="100"></div>
+                            {% elif product.quantity >= 25 and product.quantity <= 75 %}
+                              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{ product.quantity }}%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% else %}
+                              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ product.quantity }}%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            {% endif %}
+                            </div>
+                            <span>
+                              <h6 class="text-light mt-1 float-start me-4">0</h6>
+
+                              {% if product.quantity <= 25 %}
+                                <h6 class="text-danger mt-1 float-start ms-5">{{ product.quantity }}</h6>
+                              {% elif product.quantity >= 25 and product.quantity <= 75 %}
+                                <h6 class="text-warning mt-1 float-start ms-5">{{ product.quantity }}</h6>
+                              {% else %}
+                                <h6 class="text-success mt-1 float-start ms-5">{{ product.quantity }}</h6>
+                              {% endif %}
+
+                              <h6 class="text-light mt-1 float-end">100</h6>
+                            </span>
+                          </div>
+                        {% endfor %} 
+                    </ul>
+                </div>
+            </div>
+    {% endfor %}
+  </div>
+
+  <hr class="bg-light">
+  <button type="button" class="btn btn-outline-light mt-3 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Produkte hinzufügen
+  </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog bg-dark text-light">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header bg-dark text-light">
+            <h5 class="modal-title" id="exampleModalLabel">Produkte hinzufügen</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body bg-dark text-light">
+            <form class="bg-dark text-light" id="myForm" method="post">
+              {% csrf_token %}
+              <div class="form-group bg-dark text-light">
+                {% for resourceProduct in resourceForm %}
+                  <div class="text-light">
+                    {{ resourceProduct.label }}
+                  </div>
+                    {{ resourceProduct }}
+                {% endfor %}   
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock RESOURCES %}
+

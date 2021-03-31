@@ -1,0 +1,43 @@
+/* Carousel */
+.carousel {
+    width: 100%;
+}
+
+/* HALDER'S KEBAB */
+.halder-title {
+    font-weight: bold;
+    font-family:'Times New Roman', Times, serif;
+}
+
+/* Login modal*/
+.login_layer_outer, .registration_layer_outer {
+    background-color: #383b41;
+}
+
+.login-text {
+    font-size: larger;
+    font-weight: bold;
+}
+
+/* FOOT INFORMATION */
+.foot-info {
+    background-color: #2d2f31;
+}
+
+/* PRICE LIST STYLES */
+
+.price-menu {
+    background-color: #2d2f31;
+}
+
+.price-menu-ul > li{
+    background-color: #383b41;
+}
+
+.for-us-card {
+    background-color: #2d2f31;
+}
+
+.our-footer {
+    background-color: #18191a;
+}

@@ -1,0 +1,47 @@
+{% extends 'index_base.html' %}
+{% block STATISTIC %}
+<h3 class="text-light">Sold product's statistic</h3>
+<hr class="bg-light">
+<div class="chart-container" style="position: relative; height:40vh; width:85vw">
+    <canvas id="SoldProductsChart"></canvas>
+</div>
+
+<script>
+    var ctx = document.getElementById('SoldProductsChart').getContext('2d');
+
+    var kebab_data = {{ statistic_kebab_data }};
+    var pizza_data = {{ statistic_pizza_data }};
+    var drinks_data = {{ statistic_drinks_data }};
+
+    var labels  = JSON.parse("{{statistic_label_data|escapejs}}");
+  
+    new Chart(ctx, {
+      type: 'line',
+
+      // The data for the dataset
+      data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Pizza",
+              borderColor: 'rgb(189, 60, 40)',
+              data: pizza_data
+            },
+            {
+              label: "Kebab",
+              borderColor: 'rgb(189, 184, 40)',
+              data: kebab_data
+            },
+            {
+              label: "Drinks",
+              borderColor: 'rgb(40, 57, 189)',
+              data: drinks_data
+            },
+          ],
+      },
+
+      // Configuration options
+      options: {}
+    });
+</script>
+{% endblock STATISTIC %}
