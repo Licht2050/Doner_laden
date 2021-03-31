@@ -9,10 +9,21 @@ from .models import Product, ContactMe, Order, ProductCounter
 
 class RegistrationsForm(UserCreationForm): 
     email = forms.EmailField(label='Email',widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    
     class Meta:
         model = User
         fields = ["first_name", "last_name", "username", "email", "password1", "password2"]
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['last_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['username'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password1'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password2'].widget.attrs.update({'class': 'form-control'})
+
+
+    #Es wird nach email in der Datenbank geprueft. Falls vorhaden ist, wird Error ausgeworfen.
     def clean_email(self):
         email = self.cleaned_data.get('email')
         try:
@@ -21,6 +32,7 @@ class RegistrationsForm(UserCreationForm):
             return email
         raise forms.ValidationError(f"Username {email} ist schon vorhanden!")
 
+    #Falls Benutzername schon registriert ist wird Error ausgeworfen.
     def clean_username(self):
         uname = self.cleaned_data.get('username')
         try:
@@ -36,6 +48,12 @@ class LoginForm(forms.ModelForm):
         model = User
         fields = ['username', 'password']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': 'form-control'})
+        self.fields['password'].widget.attrs.update({'class': 'form-control'})
+
+    #Wird nach username und password ueberprueft. Falls nicht stimmt wird Error ausgeworfen.
     def clean(self):
         if self.is_valid():
             uname = self.cleaned_data['username']
@@ -63,12 +81,27 @@ class ProductCounterForm(forms.ModelForm):
         model = ProductCounter
         fields = ['quantity']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['quantity'].widget.attrs.update({'class': 'form-control'})
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        quantity = cleaned_data.get('quantity')
+        #Falls Quantity < 0 wird Error ausgeworfen.
+        if quantity is not None and quantity > 0:
+            return cleaned_data
+        raise forms.ValidationError('Quantity should be > 0!')
+
+
 class OrderForm(forms.ModelForm):
     
     class Meta:
         model = Order
         fields = [ 'description']
-        child_model = ProductCounter
-        # child_form_class = ProductCounterForm
-        child_fields = ['quantity']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['description'].widget.attrs.update({'class': 'form-control'})
 

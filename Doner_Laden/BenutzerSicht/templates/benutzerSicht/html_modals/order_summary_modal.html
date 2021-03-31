@@ -1,4 +1,5 @@
 <!-- ORDER SUMMARY MODAL-->
+{% load mathfilters %}
 <div class="modal fade" id="summaryOrderModal" tabindex="-1" role="dialog" aria-labelledby="summaryOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark">
@@ -7,62 +8,52 @@
             </div>
             <div class="modal-body">
                 <!-- ORDER LIST -->
-                <form>
-                    <div>
-                        <h5 class="text-light">Anzahl Produkte: <span class="halder-price h4 ms-1 text-danger">8</span></h5>
-                    </div>
+                <form method="post">
+                    {% csrf_token %}
                     <div>
                         <ul class="list-group price-menu-ul">
+                        {% for  prdCounter in  bestellung  %}
+                            {% if forloop.counter == 1 %}
+                                <div>
+                                    <h5 class="text-light">Product Quantity: <span class="halder-price h4 ms-1 text-danger">{{ productAnzahl }}</span></h5>
+                                </div>
+                            {% endif %} 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="halder-price h5 text-danger">1</span>
+                                    <span class="halder-price h5 text-danger">{{ prdCounter.product_counter.quantity }}</span>
                                     <span class="text-light mx-2">x</span>
-                                    <b class="halder-title text-light h4">XXL Doener: </b>
+                                    <b class="halder-title text-light h4">{{ prdCounter.product_counter.product }}: </b>
                                     
                                 </div>
                                 <div class="d-inline">
-                                    <span class="halder-price h5 pe-2 text-danger">29.99 Euro</span>
-                                    <a class="btn btn-outline-light" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#">+</a>
-                                    <a class="btn btn-outline-danger" role="button" href="#">x</a>
+                                    <span class="halder-price h5 pe-2 text-danger">{{ prdCounter.product_counter.quantity |mul:prdCounter.product_counter.product.price }} Euro</span>
+                                    {% comment %} <a class="btn btn-outline-light building-link" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#orderModal" name="update"  value="{{ prdCounter.product_counter.product.id }}"
+                                        data-name='{{ prdCounter.product_counter.product.name }}'
+                                        data-id='{{ prdCounter.product_counter.product.id }}'
+                                        data-price='{{ prdCounter.product_counter.product.price }}'
+
+                                    >+</a> {% endcomment %}
+                                    <a class="btn btn-outline-danger" role="button" href='{% url "home"  prdCounter.product_counter.product.id %}'>x</a>
                                 </div>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center mt-2">
-                                <div>
-                                    <span class="halder-price h5 text-danger">2</span>
-                                    <span class="text-light mx-2">x</span>
-                                    <b class="halder-title text-light h4">Pizza Hawai: </b>
-                                    
-                                </div>
-                                <div class="d-inline">
-                                    <span class="halder-price h5 pe-2 text-danger">19.99 Euro</span>
-                                    <a class="btn btn-outline-light" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#">+</a>
-                                    <a class="btn btn-outline-danger" role="button" href="#">x</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center mt-2">
-                                <div>
-                                    <span class="halder-price h5 text-danger">5</span>
-                                    <span class="text-light mx-2">x</span>
-                                    <b class="halder-title text-light h4">Coca-Cola: </b>
-                                </div>
-                                <div class="d-inline">
-                                    <span class="halder-price h5 pe-2 rounded text-danger">9.99 Euro</span>
-                                    <a class="btn btn-outline-light" role="button" data-dismiss="modal" data-toggle="modal" data-target="#orderModal" href="#">+</a>
-                                    <a class="btn btn-outline-danger" role="button" href="#">x</a>
-                                </div>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div>
-                        <h5 class="text-light mt-3 float-end pe-1"><b>Gesamt Betrag: </b><span class="text-danger">59.97 Euro</span></h5>
+                        <h5 class="text-light mt-3 float-end pe-1"><b>Total Price: </b><span class="text-danger">{{ product_total_price }} Euro</span></h5>
                     </div>
                         <!--<button type="submit" class="btn btn-primary">Submit</button>-->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Schließen</button>
-                <button type="submit" class="btn btn-outline-light" data-dismiss="modal" data-toggle="modal" data-target="#">Bestellen</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    {% if user.is_authenticated %}
+                        <button type="submit" name="order_summery" class="btn btn-outline-light">Order</button>
+                    {% else %}
+                        <a class="btn btn-outline-light" href="{% url 'login' %}">Order</a>
+                    {% endif %}
+                    
+                </div>
+            </form>
         </div>
     </div>
 </div>

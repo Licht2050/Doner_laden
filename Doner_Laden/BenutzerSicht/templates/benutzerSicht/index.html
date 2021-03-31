@@ -3,13 +3,13 @@
     
 {% block INDEX %}
     <!-- CAROUSEL -->
-    <div class="text-light">
+    {% comment %} <div class="text-light">
         {% if user.is_authenticated %}
             Guten Morgen {{ user.username }}!
         {% else %}
             <p>Sie sind nicht angemeldet<p>
         {% endif %}
-    <div>
+    <div> {% endcomment %}
     {% include "benutzerSicht/carousel.html" %}
 
     <!-- PRODUCT VIEW CARDS -->

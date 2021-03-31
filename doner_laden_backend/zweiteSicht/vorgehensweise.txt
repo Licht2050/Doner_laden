@@ -1,2 +1,0 @@
-for products to list them using FIFO:
-    bestellung = Bestellung.objects.all().order_by('date') # just example

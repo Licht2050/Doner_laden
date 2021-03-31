@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'BenutzerSicht',
     'MitarbeiterSicht',
     'crispy_forms',
+    'mathfilters',
+    
 ]
 
 MIDDLEWARE = [
@@ -70,6 +72,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            ],
+            'builtins': [
+                'MitarbeiterSicht.templatetags.my_tags'
             ],
         },
     },

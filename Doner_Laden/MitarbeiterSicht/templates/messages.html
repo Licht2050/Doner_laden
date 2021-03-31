@@ -1,0 +1,37 @@
+{% extends 'index_base.html' %}
+{% block MESSAGES %}
+<h3>Messages from clients</h3>
+<hr class="bg-light">
+<table class="table text-light text-center">
+  <thead>
+    <tr>
+      <th scope="col">From</th>
+      <th scope="col">Title</th>
+      <th scope="col">Message</th>
+      <th scope="col">Received</th>
+      <th scope="col">Read</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody class="overflow-auto">
+    {% for message in all_messages %}
+    <tr class="text-center">
+      <td>{{ message.user_email }}</td>
+      <td>{{ message.message_title }}</td>
+      <td>{{ message.message }}</td>
+      <td>{{ message.created_date }}</td>
+      <td>False</td>
+      <td>
+        <form method="POST">
+        {% csrf_token %}
+        <input name="message_id" type="hidden" value={{ message.id }}>
+        <button type="submit" class="btn btn-outline-success" name="message_done">Done</button>
+        <button type="submit" class="btn btn-outline-danger" name="message_delete">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock MESSAGES %}

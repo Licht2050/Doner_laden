@@ -1,34 +1,41 @@
 <!-- ORDER MODAL -->
-{% csrf_token %}
 <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h3 class="modal-title text-light halder-title" id="orderModalLabel">XXL Döner bestellen</h3>
+                <h3 class="modal-title text-light halder-title" id="building-name"></h3>
             </div>
             <div class="modal-body">
                 <!-- ORDER FORM -->
-                <form>
-                    
-                    
+                <form method="post">
+                    {% csrf_token %}
                     <div class="form-group mt-2">
-                    {% for  prdCounter in  prdCounterForm  %}
-                        <div  class="text-light">{{ prdCounter }}</div>
-                    {% endfor %}
-                        <label for="QuantityInput" class="text-light">Anzahl</label>
-                        <input type="number" class="form-control" id="QuantityInput" aria-describedby="QuantityInputHelp" placeholder="1" min="1" max="100">
+                        {% for  prdCounter in  prdCounterForm  %}
+                            <div  class="text-light">{{ prdCounter.label }}</div>
+                            {{ prdCounter }}
+                        {% endfor %}
                     </div>
                     <div class="form-group mt-2">
-                        <label for="messageInput" class="text-light">Extra Wünsche</label>
-                        <textarea class="form-control" id="messageTextArea" placeholder="Ich hätte gerne keine Zwiebeln..." cols="30" rows="5"></textarea>
+                        {% for description in orderForm %}
+                            <div class="text-light">{{ description.label }}</div>
+                            {{ description }}
+                        {% endfor %}
+                        {% if loginForm.errors %}
+                            <div class="row text-light">
+                                {% for field_with_error,error_messages in loginForm.errors.items %}
+                                    <div class="alert alert-danger">{{field_with_error}} {{error_messages}}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
-                        <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        <input id="counter" style="display: none;">
+                        <button type="submit" class="btn btn-outline-light" name="addToCart" id="pID" value="" >Add to Cart</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Schließen</button>
-                <button type="submit" class="btn btn-outline-light" data-dismiss="modal" data-toggle="modal" data-target="#">Bestellen</button>
-            </div>
+            
         </div>
     </div>
 </div>
